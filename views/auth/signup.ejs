@@ -1,24 +1,30 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" href="/css/auth.css">
-</head>
+		<link rel="stylesheet" href="/css/auth.css">
+		<link rel="stylesheet" href="/css/errorMessage.css">
+	</head>
 
 <body>
    <%- include('../includes/navigation.ejs') %>
+
+	 <% validationErrors.forEach(error => { %>
+    <p class="error"><%= error.msg %></p>
+	 <% }) %>
+
 
     <main>
         <form class="login-form" action="/signup" method="POST">
             <div class="form-control">
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email">
+                <input type="email" value="<%= oldInputs.email %>" name="email" id="email">
             </div>
             <div class="form-control">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <input type="password" value="<%= oldInputs.password %>" name="password" id="password">
             </div>
             <div class="form-control">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword">
+                <input type="password" value="<%= oldInputs.confirmPassword %>" name="confirmPassword" id="confirmPassword">
             </div>
 						<input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit">Sing up</button>
